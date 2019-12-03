@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <catalog>
+            <dynamicsimpleattributes>
+                <enabled>0</enabled>
+                <include_stock>1</include_stock>
+                <show_out_of_stock>0</show_out_of_stock>
+                <attributes_map>{"_1575404804174_174":{"attribute":"sku","selector":"[itemprop=sku]"},"_1575404809375_375":{"attribute":"short_description","selector":"[itemprop=description]"},"_1575404818959_959":{"attribute":"name","selector":"[itemprop=name], head title"},"_1575404829217_217":{"attribute":"description","selector":".product.data.items .product.attribute.description .value"}}</attributes_map>
+            </dynamicsimpleattributes>
+        </catalog>
+    </default>
+</config>
