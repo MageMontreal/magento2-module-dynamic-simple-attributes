@@ -91,10 +91,9 @@ class Configurable
         foreach ($attributes as $attribute) {
             if (array_key_exists($attribute->getAttributeCode(), $this->itemProps)) {
                 $code = $attribute->getAttributeCode();
-                $value = (string) $attribute->getFrontend()->getValue($product);
+                $value = $this->getAttributeValue($product, $attribute);
 
                 if ($value) {
-                    $value = $this->filterProvider->getPageFilter()->filter($value);
                     $selectors = $this->itemProps[$code];
 
                     if (!is_array($selectors)) {
@@ -124,6 +123,15 @@ class Configurable
         }
 
         return $jsonResult;
+    }
+
+    public function getAttributeValue($product, $attribute) {
+        $value = $attribute->getFrontend()->getValue($product);
+        if ($value) {
+            return $this->filterProvider->getPageFilter()->filter($value);
+        }
+
+        return null;
     }
 
     private function loadPropsArray() {
