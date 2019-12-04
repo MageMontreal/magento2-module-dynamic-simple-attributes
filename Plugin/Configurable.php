@@ -91,21 +91,19 @@ class Configurable
         foreach ($attributes as $attribute) {
             if (array_key_exists($attribute->getAttributeCode(), $this->itemProps)) {
                 $code = $attribute->getAttributeCode();
-                $value = $this->getAttributeValue($product, $attribute);
+                $selectors = $this->itemProps[$code];
 
-                if ($value) {
-                    $selectors = $this->itemProps[$code];
+                if (!is_array($selectors)) {
+                    $selectors = [$selectors];
+                }
 
-                    if (!is_array($selectors)) {
-                        $selectors = [$selectors];
-                    }
-
-                    foreach ($selectors as $selector) {
-                        $jsonResult['dynamic'][$selector][$key] = [
-                            'value' => $value
-                        ];
+                foreach ($selectors as $selector) {
+                    $value = $this->getAttributeValue($product, $attribute);
+                    if ($value) {
+                        $jsonResult['dynamic'][$selector][$key] = $value;
                     }
                 }
+
             }
         }
 
@@ -128,7 +126,9 @@ class Configurable
     public function getAttributeValue($product, $attribute) {
         $value = $attribute->getFrontend()->getValue($product);
         if ($value) {
-            return $this->filterProvider->getPageFilter()->filter($value);
+            return [
+                'value' => $this->filterProvider->getPageFilter()->filter($value)
+            ];
         }
 
         return null;
