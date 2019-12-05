@@ -49,6 +49,10 @@ class Configurable
         $this->scopeConfig = $scopeConfig;
     }
 
+    public function getBlock() {
+        return $this->subject;
+    }
+
     public function aroundGetAllowProducts(\Magento\ConfigurableProduct\Block\Product\View\Type\Configurable $subject, callable $proceed) {
         if($this->isEnabled() && $this->showOutOfStock()) {
             $skipSaleableCheck = $this->catalogProduct->getSkipSaleableCheck();
@@ -108,7 +112,7 @@ class Configurable
         }
 
         if($this->includeStock()) {
-            $availability = $this->subject->getLayout()
+            $availability = $this->getBlock()->getLayout()
                 ->createBlock('Magento\Catalog\Block\Product\AbstractProduct')
                 ->setTemplate('Magento_Catalog::product/view/type/default.phtml')
                 ->setData('product', $product)
