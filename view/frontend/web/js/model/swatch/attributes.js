@@ -14,10 +14,10 @@ define([
             var dynamic = this.options.jsonConfig.dynamic;
             for (var code in dynamic){
                 if (dynamic.hasOwnProperty(code)) {
-                    var value = "";
-                    var replace = false;
-                    var $placeholder = $(code);
-                    var allSelected = true;
+                    var value = "",
+                        replace = false,
+                        $placeholder = $(code),
+                        allSelected = true;
 
                     if(!$placeholder.length) {
                         continue;
@@ -32,15 +32,15 @@ define([
                     if(allSelected){
                         var products = this._CalcProducts();
                         var productId = products.slice().shift();
-                        if(productId && this.options.jsonConfig.dynamic[code][productId]) {
-                            value = this.options.jsonConfig.dynamic[code][productId].value;
-                            replace = this.options.jsonConfig.dynamic[code][productId].replace;
+                        if(productId && dynamic[code][productId]) {
+                            value = dynamic[code][productId].value;
+                            replace = dynamic[code][productId].replace;
                         }
                     }
 
                     if(!value) {
-                        value = this.options.jsonConfig.dynamic[code]['default'].value;
-                        replace = this.options.jsonConfig.dynamic[code]['default'].replace;
+                        value = dynamic[code]['default'].value;
+                        replace = dynamic[code]['default'].replace;
                     }
 
                     if(value) {

@@ -14,24 +14,24 @@ define([
 
 			for (var code in dynamic){
 				if (dynamic.hasOwnProperty(code)) {
-					var value = "";
-					var replace = false;
-					var attrs = [];
-					var $placeholder = $(code);
+					var value = "",
+						replace = false,
+						attrs = [],
+						$placeholder = $(code);
 
 					if(!$placeholder.length) {
 						continue;
 					}
 
-					if(this.simpleProduct){
-						value = this.options.spConfig.dynamic[code][this.simpleProduct].value;
-						replace = this.options.spConfig.dynamic[code][this.simpleProduct].value;
-						attrs = this.options.spConfig.dynamic[code][this.simpleProduct].attrs;
+					if (this.simpleProduct && typeof dynamic[code][this.simpleProduct] != 'undefined') {
+						value = dynamic[code][this.simpleProduct].value;
+						replace = dynamic[code][this.simpleProduct].replace;
+						attrs = dynamic[code][this.simpleProduct].attrs;
 					}
 
 					if(!value) {
-						value = this.options.spConfig.dynamic[code]['default'].value;
-						replace = this.options.spConfig.dynamic[code]['default'].replace;
+						value = dynamic[code]['default'].value;
+						replace = dynamic[code]['default'].replace;
 					}
 
 					if(value) {

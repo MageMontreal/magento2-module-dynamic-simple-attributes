@@ -85,7 +85,7 @@ class Configurable
         return $result;
     }
 
-    private function addItemProps($product, $key, $jsonResult)
+    public function addItemProps($product, $key, $jsonResult)
     {
         $attributes = $product->getTypeInstance()->getSetAttributes($product);
         foreach ($attributes as $attribute) {
