@@ -29,7 +29,7 @@ define([
 						attrs = dynamic[code][this.simpleProduct].attrs;
 					}
 
-					if(!value) {
+					if(!value && dynamic[code] && dynamic[code]['default']) {
 						value = dynamic[code]['default'].value;
 						replace = dynamic[code]['default'].replace;
 					}
