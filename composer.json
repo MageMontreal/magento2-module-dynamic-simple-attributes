@@ -2,10 +2,10 @@
     "name": "magemontreal/module-dynamic-simple-attributes",
     "description": "",
     "require": {
-        "php": "~7.1.3||~7.2.0||~7.3.0"
+        "php": "~7.4.0||~8.1.0"
     },
     "type": "magento2-module",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "autoload": {
         "files": [
             "registration.php"
