@@ -24,7 +24,7 @@ define([
                     }
 
                     for(var i = 0; i<this.options.jsonConfig.attributes.length;i++){
-                        if (!$('div.product-info-main .product-options-wrapper .swatch-attribute.' + this.options.jsonConfig.attributes[i].code).attr('option-selected')){
+                        if (!$('div.product-info-main .product-options-wrapper .swatch-attribute.' + this.options.jsonConfig.attributes[i].code).data('option-selected')){
                             allSelected = false;
                         }
                     }
