@@ -93,21 +93,25 @@ class Configurable
     {
         $attributes = $product->getTypeInstance()->getSetAttributes($product);
         foreach ($attributes as $attribute) {
-            if (array_key_exists($attribute->getAttributeCode(), $this->itemProps)) {
-                $code = $attribute->getAttributeCode();
-                $selectors = $this->itemProps[$code];
+            try {
+                if (array_key_exists($attribute->getAttributeCode(), $this->itemProps)) {
+                    $code = $attribute->getAttributeCode();
+                    $selectors = $this->itemProps[$code];
 
-                if (!is_array($selectors)) {
-                    $selectors = [$selectors];
-                }
-
-                foreach ($selectors as $selector) {
-                    $value = $this->getAttributeValue($product, $attribute);
-                    if ($value) {
-                        $jsonResult['dynamic'][$selector][$key] = $value;
+                    if (!is_array($selectors)) {
+                        $selectors = [$selectors];
                     }
-                }
 
+                    foreach ($selectors as $selector) {
+                        $value = $this->getAttributeValue($product, $attribute);
+                        if ($value) {
+                            $jsonResult['dynamic'][$selector][$key] = $value;
+                        }
+                    }
+
+                }
+            } catch (\Exception $e) {
+                // Ignore attribute in case of error
             }
         }
 
