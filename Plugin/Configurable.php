@@ -94,7 +94,7 @@ class Configurable
         $attributes = $product->getTypeInstance()->getSetAttributes($product);
         foreach ($attributes as $attribute) {
             try {
-                if (array_key_exists($attribute->getAttributeCode(), $this->itemProps)) {
+                if (is_object($attribute) && array_key_exists($attribute->getAttributeCode(), $this->itemProps)) {
                     $code = $attribute->getAttributeCode();
                     $selectors = $this->itemProps[$code];
 
